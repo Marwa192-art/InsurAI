@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"  integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/admindashboard.css') }}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <!--=============== JS ===============-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+      <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+      <title>{{ title }}</title>
+   </head>
+   <body>
+      <!--=============== HEADER ===============-->
+      <header class="header" id="header">
+         <div class="header__container">
+            <div class="header__logo">
+            
+               <div class="wrapper">
+                  <div class="navbar">
+                    <!-- <div class="navbar_left">
+                      <div class="logo">
+                        <a href="#"></a>
+                      </div>
+                    </div> -->
+                
+                    <div class="navbar_right">
+                      <div class="notifications">
+                        <div class="icon_wrap">
+                           <i class="far fa-bell"></i>
+                           <span class="count">12</span>
+                        </div>
+                        
+                        <div class="notification_dd">
+                            <ul class="notification_ul">
+                                <li class="starbucks success">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Success</p>  
+                                    </div>
+                                </li>  
+                                <li class="baskin_robbins failed">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Failed</p>  
+                                    </div>
+                                </li> 
+                                <li class="mcd success">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Success</p>  
+                                    </div>
+                                </li>  
+                                <li class="pizzahut failed">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Failed</p>  
+                                    </div>
+                                </li> 
+                                <li class="kfc success">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Success</p>  
+                                    </div>
+                                </li> 
+                                <li class="show_all">
+                                    <p class="link">Show All Activities</p>
+                                </li> 
+                            </ul>
+                        </div>
+                        
+                      </div>
+                      <div class="profile">
+                        <div class="icon_wrap">
+                          <img src="{{ url_for('static', filename = 'img/avatars/Female.png') }}" alt="profile_pic">
+                          <span class="name">{{session.adminname}} </span>
+                          <i class="fas fa-chevron-down"></i>
+                        </div>
+                
+                        <div class="profile_dd">
+                          <ul class="profile_ul">
+                            <li><a class="profile" href="#"><span class="picon"><i class="fas fa-user-alt"></i></span>Profile</a>
+                              <!-- <div class="btn">My Account</div> -->
+                            </li>
+                            <li><a class="settings" href="#"><span class="picon"><i class="fas fa-cog"></i></span>Settings</a></li>
+                            <li><a class="logout" href="/adminlogout"><span class="picon"><i class="fas fa-sign-out-alt"></i></span>Logout</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               </div>   
+            </div>
+            <button class="header__toggle" id="header-toggle">
+               <i class="ri-menu-line"></i>
+            </button>
+         </div>
+      </header>
+
+      <!--=============== SIDEBAR ===============-->
+      <nav class="sidebar" id="sidebar">
+         <div class="sidebar__container">
+            <div class="sidebar__user">
+               <div class="sidebar__img">
+                  <img src="{{ url_for('static', filename = 'img/icon/icon-02-light.png') }}" alt="image">
+               </div>
+   
+               <div class="sidebar__info">
+                  <h3>InsurSafe AI</h3>
+                  <span></span>
+               </div>
+            </div>
+
+            <div class="sidebar__content">
+               <div>
+                  <h3 class="sidebar__title">MANAGE</h3>
+
+                  <div class="sidebar__list">
+                     <a href="/insurance_company/pages/dashboard" class="sidebar__link">
+                        <i class="ri-pie-chart-2-fill"></i>
+                        <span>Dashboard</span>
+                     </a>
+                     
+                     <a href="/insurance_company/pages/claimverification2" class="sidebar__link active-link">
+                        <i class="ri-robot-2-fill"></i>
+                        <span>Image Fraud Detection</span>
+                     </a>
+                     <a href="/insurance_company/pages/claims_history2" class="sidebar__link active-link">
+                        <i class="ri-profile-fill"></i>
+                        <span>Fraud Detection History</span>
+                     </a>
+                     <a href="/insurance_company/pages/usermanagement" class="sidebar__link">
+                        <i class="ri-group-fill"></i>
+                        <span>Users Management</span>
+                     </a>
+
+                     
+
+                   
+
+            <div class="sidebar__actions">
+               <button>
+                  <i class="ri-moon-clear-fill sidebar__link sidebar__theme" id="theme-button">
+                     <span>Theme</span>
+                  </i>
+               </button>
+
+               <a href="\insurance_company_logout" class="sidebar__link">
+                  <i class="ri-logout-box-r-fill"></i>
+                  <span>Log Out</span>
+               </a>
+            </div>
+         </div>
+      </nav>
+
+      <!--=============== MAIN ===============-->
+      
+      <main class="main container" id="main">
+         <h1>Claims verification history</h1>
+     
+         <!-- Messages Flash -->
+         {% with messages = get_flashed_messages(with_categories=true) %}
+             {% if messages %}
+                 {% for category, message in messages %}
+                     <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                         {{ message }}
+                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                     </div>
+                 {% endfor %}
+             {% endif %}
+         {% endwith %}
+     
+         <!-- Tableau des compagnies d'assurance -->
+         
+                     
+         <table class="table table-bordered table-striped">
+            <thead class="bg-primary text-white">
+               <tr>
+                  <th>ID</th>
+                  <th>Image</th>
+                  <th>Prediction</th>
+                  <th>Fraud Score</th>
+                  <th>Date</th>
+               </tr>
+            </thead>
+               {% for claim in claims %}
+               <tr>
+                  <td>{{claim.id}}</td>
+                  <td><img src="{{ url_for('uploaded_file', filename=claim.image_name) }}" width="100"></td>
+                  <td>{{ claim.prediction }}</td>
+                  <td>{{ claim.score }}</td>
+                  <td>{{ claim.created_at }}</td>
+               </tr>
+               {% endfor %}
+         </table>
+     </main>
+     
+                    
+                    
+        
+      
+      <!--=============== MAIN JS ===============-->
+      <script src="{{ url_for('static', filename = 'js/admindashboard.js') }}"></script>
+   </body>
+</html>

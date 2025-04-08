@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/c/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">   
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'favicons/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/userloginsignup.css') }}">
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title> {{ title }}</title>
+   </head>
+<body>
+  <div class="container">
+    <input type="checkbox" id="flip">
+    <div class="cover">
+      <div class="front">
+        <img src="{{ url_for('static', filename = 'img/car-insurance.jpg') }}" alt="">       
+        <div class="text">
+          <span class="text-1">Welcom Back</span>
+          <span class="text-2">Let's get connected</span>
+        </div>
+      </div>
+      <div class="back">
+        <img class="backImg" src="{{ url_for('static', filename = 'img/car-insurance2.png') }}" alt="">
+        <div class="text">
+          <span class="text-1">Insurance That Drives Satisfaction,<br> Mile After Mile </span>
+          <span class="text-2">Let's get started</span>
+        </div>
+      </div>
+    </div>
+    <div class="forms">
+        <div class="form-content">
+            <div class="login-form">               
+                  <a href="/" class="logo">
+                    <img src="{{ url_for('static', filename = 'img/icon/icon-02-primary.png') }}" alt="logo">
+                    <h2>InsurSafe AI</h2>
+                  </a>               
+                <div class="title">Login</div>              
+                <form method="POST" action="/insurance_company_login">
+                      {% if msg %}
+                          <script>
+                              window.message = "{{ msg }}";
+                              window.messageType = "{{ msg_type }}";
+                          </script>                       
+                      {% endif %}
+                    <div class="input-boxes">
+                        <div class="input-box">
+                            <i class="fas fa-envelope"></i>
+                            <input type="text" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="input-box">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="text"><a href="/insurance_company/pages/forgot_pw">Forgot password?</a></div>
+                        <div class="button input-box">
+                            <input type="submit" value="Sumbit">
+                        </div>
+                        <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
+                    </div>
+                </form>
+            </div>
+            <div class="signup-form">
+                <div class="title">Signup</div>
+                <div class="progress-bar">
+                    <div class="step">
+                      <p>Name</p>
+                      <div class="bullet">
+                        <span>1</span>
+                      </div>
+                      <div class="check fas fa-check"></div>
+                    </div>
+                    <div class="step">
+                      <p>Contact</p>
+                      <div class="bullet">
+                        <span>2</span>
+                      </div>
+                      <div class="check fas fa-check"></div>
+                    </div>
+                    <div class="step">
+                      <p>Address</p>
+                      <div class="bullet">
+                        <span>3</span>
+                      </div>
+                      <div class="check fas fa-check"></div>
+                    </div>
+                    <div class="step">
+                      <p>Submit</p>
+                      <div class="bullet">
+                        <span>4</span>
+                      </div>
+                      <div class="check fas fa-check"></div>
+                    </div>
+                  </div>
+                  <div class="form-outer">
+                    <form method="POST" action="/insurance_company_signup">
+                      {% if msg %}
+                            <script>
+                                window.message = "{{ msg }}";
+                                window.messageType = "{{ msg_type }}";
+                            </script>                       
+                      {% endif %}
+                      <div class="page slide-page">
+                        <div class="title">Company Info:</div>
+                        <div class="input-boxes">
+                            <div class="input-box">
+                              <i class="fas fa-user"></i>
+                              <input type="text" name="company_name" placeholder="Company Name" required>
+                            </div>
+                            <div class="input-box">
+                              <i class="fas fa-user"></i>
+                              <input type="text" name="registration_number" placeholder="Company Registration Number" required>
+                            </div>
+                          
+                          
+                         
+                          
+                        </div>
+                          <div class="field">
+                            <button class="firstNext next">Next</button>
+                          </div>
+                        
+                        <div class="text login-text">Already have an account? <label for="flip">Login now</label></div>
+                      </div>
+            
+                      
+                      <div class="page">
+                        <div class="title">Company Contact :</div>
+                        <div class="input-boxes">
+                          <div class="input-box">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" name="official_email" placeholder="Official Email Address" required>
+                          </div>
+                          <div class="input-box">
+                            <i class="fas fa-phone"></i>
+                            <input type="text" name="phone" placeholder="Phone Number" required>
+                          </div>    
+                          <div class="input-box">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" name="address" placeholder="Headquarters Address" required>
+                          </div>
+
+                          <div class="input-box">
+                            <i class="fas fa-flag"></i>
+                            <select name="country" id="country" required>
+                                <option selected disabled value="">Select Country</option>
+                            </select>
+                        </div>
+                                        
+                          <div class="field btns">
+                            <button class="prev-1 prev">Previous</button>
+                            <button class="next-1 next">Next</button>
+                          </div>
+                        </div>
+                        <div class="text login-text">Already have an account? <label for="flip">Login now</label></div>
+                      </div>
+            
+                      <div class="page">
+                        <div class="title">responsible Info:</div>
+                        <div class="input-boxes">
+                          <div class="input-box">
+                            <i class="fas fa-city"></i>
+                            <input type="text" name="full_name" placeholder="Full Name" required>
+                          </div>
+                                 
+                          <div class="input-box">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" name="email" placeholder="Professional Email" required>
+                          </div>
+                          <div class="input-box">
+                            <i class="fas fa-phone"></i>
+                            <input type="text" name="responsible_phone" placeholder="Phone Number" required>
+                          </div>                                 
+                          <div class="field btns">
+                            <button class="prev-2 prev">Previous</button>
+                            <button class="next-2 next">Next</button>
+                          </div>
+                        </div>
+                        <div class="text login-text">Already have an account? <label for="flip">Login now</label></div>
+                      </div>
+            
+                      <div class="page">
+                        <div class="title">Login Details:</div>
+                        <div class="input-boxes">
+
+                          
+                          <div class="input-box">
+                            <i class="fas fa-lock"></i>
+                            <input id="pass1" type="password" name="password" placeholder="Enter your password" required>
+                          </div>
+                          <div class="input-box">
+                            <i class="fas fa-lock"></i>
+                            <input id="pass2" type="password" placeholder="Confirm your password" required>
+                          </div>
+                          
+                          <div class="field btns">
+                            <button class="prev-3 prev">Previous</button>
+                            <button onclick="verf_pw(pass1.value, pass2.value);" type="submit" class="submit">Submit</button>
+                          </div>
+                        </div>
+                        <div class="text login-text">Already have an account? <label for="flip">Login now</label></div>
+                      </div>
+                    </form>
+                  </div>
+              
+            </div>
+        </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename = 'js/userloginsignup.js') }}"></script>
+  <script>
+    function verf_pw(pass1, pass2) {
+        if (pass1 === "" || pass2 === "") {
+            alert('Enter and confirm your password');
+            return false;
+        } else if (pass1.length < 8) {
+            alert('Password must contain at least 8 characters');
+            return false;
+        } else if (pass1 !== pass2) {
+            alert('Password confirmation does not match');
+            return false;
+        }
+        return true;  // Ajout pour valider le formulaire si tout est correct
+    }
+</script>
+
+<script>
+    async function loadCountries() {
+        const response = await fetch("https://restcountries.com/v3.1/all");
+        const countries = await response.json();
+        const select = document.getElementById("country");
+
+        countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+
+        countries.forEach(country => {
+            let option = document.createElement("option");
+            option.value = country.name.common;
+            option.textContent = country.name.common;
+            select.appendChild(option);
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadCountries);
+</script>
+
+</body>
+</html>

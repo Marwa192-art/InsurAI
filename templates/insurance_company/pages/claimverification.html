@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"  integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/admindashboard.css') }}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <!--=============== JS ===============-->
+      
+      <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+      <title>{{ title }}</title>
+      <style>
+        .payment_container {
+           display: none;
+           position: fixed;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           background: white;
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+           width: 90%;
+           max-width: 400px;
+           text-align: center;
+           z-index: 1000;
+       }
+       
+       .payment_container h2 {
+           margin-bottom: 15px;
+       }
+       
+       .payment_container form {
+           display: flex;
+           flex-direction: column;
+           gap: 10px;
+       }
+       
+       .payment_container input, .payment_container select {
+           padding: 10px;
+           width: 100%;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+       }
+       
+       .confirm-pay-btn {
+           background-color: #27ae60;
+           color: white;
+           padding: 10px;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+           font-size: 16px;
+       }
+       
+       .confirm-pay-btn:hover {
+           background-color: #218c54;
+       }
+       
+       /* Ajout d'un fond semi-transparent pour améliorer l'affichage */
+       .overlay {
+           display: none;
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(0, 0, 0, 0.5);
+           z-index: 999;
+       }
+       .pay-btn {
+           background-color: #ff9800; /* Couleur orange */
+           color: white; /* Texte en blanc */
+           font-size: 16px; /* Taille du texte */
+           font-weight: bold; /* Texte en gras */
+           padding: 10px 20px; /* Espacement intérieur */
+           border: none; /* Supprime la bordure */
+           border-radius: 5px; /* Coins arrondis */
+           cursor: pointer; /* Curseur en forme de main */
+           transition: background-color 0.3s ease; /* Animation de transition */
+       }
+       
+       .pay-btn:hover {
+           background-color: #e68900; /* Changement de couleur au survol */
+       }
+       .alert {
+         position: fixed;
+         top: 10px; /* Distance depuis le haut */
+         left: 50%;
+         transform: translateX(-50%);
+         z-index: 1000; /* Assure que le message reste visible au-dessus */
+         width: 50%; /* Ajuste la largeur */
+         text-align: center;
+         padding: 15px;
+         border-radius: 5px;
+         font-size: 16px;
+         font-weight: bold;
+         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+     }
+     
+     </style>        
+
+   </head>
+   <body>
+      {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+      <!--=============== HEADER ===============-->
+      <header class="header" id="header">
+         <div class="header__container">
+            <a href="#" class="header__logo">
+               <!-- <i class="ri-cloud-fill"></i> -->
+               <span></span>
+            </a>
+            
+            <button class="header__toggle" id="header-toggle">
+               <i class="ri-menu-line"></i>
+            </button>
+         </div>
+      </header>
+
+      <!--=============== SIDEBAR ===============-->
+      <nav class="sidebar" id="sidebar">
+         <div class="sidebar__container">
+            <div class="sidebar__user">
+               <div class="sidebar__img">
+                  <img src="{{ url_for('static', filename = 'img/icon/icon-02-light.png') }}" alt="image">
+               </div>
+   
+               <div class="sidebar__info">
+                  <h3>InsurSafe AI</h3>
+                  <span></span>
+               </div>
+            </div>
+
+            <div class="sidebar__content">
+               <div>
+                  <h3 class="sidebar__title">MANAGE</h3>
+
+                  <div class="sidebar__list">
+                     <a href="/insurance_company/pages/dashboard" class="sidebar__link">
+                        <i class="ri-pie-chart-2-fill"></i>
+                        <span>Dashboard</span>
+                     </a>
+                     
+                     <a href="/insurance_company/pages/claimverification2" class="sidebar__link active-link">
+                        <i class="ri-robot-2-fill"></i>
+                        <span>Claim verification</span>
+                     </a>
+
+                     <a href="/insurance_company/pages/usermanagement" class="sidebar__link">
+                        <i class="ri-group-fill"></i>
+                        <span>Users Management</span>
+                     </a>
+
+                     <a href="/insurance_company/pages/claims_history2" class="sidebar__link ">
+                        <i class="ri-profile-fill"></i>
+                        <span>Claims History</span>
+                     </a>
+      <!--=============== 
+
+                     <a href="#" class="sidebar__link">
+                        <i class="ri-building-2-fill"></i>
+                        <span>Companies</span>
+                     </a>
+
+                     <a href="#" class="sidebar__link">
+                        <i class="ri-profile-fill"></i>
+                        <span>Applications</span>
+                     </a>
+
+                     
+
+                     <a href="#" class="sidebar__link">
+                      <i class="ri-bank-card-fill"></i>
+                      <span>Payments</span>
+                   </a>
+                  </div>
+               </div>
+
+               <div>
+                  <h3 class="sidebar__title">SETTINGS</h3>
+
+                  <div class="sidebar__list">
+                     <a href="#" class="sidebar__link">
+                        <i class="ri-settings-3-fill"></i>
+                        <span>Settings</span>
+                     </a>
+
+                     <a href="#" class="sidebar__link">
+                        <i class="ri-mail-unread-fill"></i>
+                        <span>My Messages</span>
+                     </a>
+
+                     <a href="#" class="sidebar__link">
+                        <i class="ri-notification-2-fill"></i>
+                        <span>Notifications</span>
+                     </a>
+                  </div>
+               </div>
+            </div>
+      <!--=============== SIDEBAR ===============-->
+
+            <div class="sidebar__actions">
+               <button>
+                  <i class="ri-moon-clear-fill sidebar__link sidebar__theme" id="theme-button">
+                     <span>Theme</span>
+                  </i>
+               </button>
+
+               <a href="\insurance_company_logout" class="sidebar__link">
+                  <i class="ri-logout-box-r-fill"></i>
+                  <span>Log Out</span>
+               </a>
+            </div>
+         </div>
+      </nav>
+
+      <!--=============== MAIN ===============-->
+      <main class="main container" id="main">
+         <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+             <div class="image_container">
+                 <div class="image_container_header">
+                     <h1>Image Fraud Analysis</h1>
+                     <p>Upload an image for fraud detection using our ML model</p>
+                 </div>
+                 
+                 <form id="uploadForm" action="/verification2" method="post" enctype="multipart/form-data">
+                     <div class="drag-area">
+                         <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                         <header>Drag & Drop</header>
+                         <span>OR</span>
+                         <button type="button" id="browseBtn">Browse File</button>
+                         <input type="file" name="imagefile" hidden accept="image/*">
+                         <img src="" alt="">
+                         <div class="close-btn"><i class="fas fa-times"></i></div>
+                         <div class="file-info">File details here</div>
+                     </div>
+                     <button type="button" class="pay-btn" id="payBtn">Payment</button>
+                     <button type="submit" class="analyze-btn" style="text-align: center;">Analyze Image</button>
+                 </form>
+                 {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+             
+ <!-- Interface de paiement -->
+ <!-- Interface de paiement -->
+<div class="payment_container" id="paymentContainer" style="display: none;">
+   <h2>Secure Payment with Edahabiya</h2>
+   <p><strong>Amount to Pay: 50DA</strong></p> <!-- Afficher le prix -->
+
+   <form id="paymentForm" action="/process_payment" method="post">
+       <input type="hidden" name="amount" value="50"> <!-- Montant caché -->
+
+       <label for="card_number">Card Number:</label>
+       <input type="text" id="card_number" name="card_number" required>
+
+       <label for="expiry_date">Expiration Date:</label>
+       <select id="expiry_month" name="expiry_month" required>
+           <option value="01">01</option>
+           <option value="02">02</option>
+           <option value="03">03</option>
+           <option value="04">04</option>
+           <option value="05">05</option>
+           <option value="06">06</option>
+           <option value="07">07</option>
+           <option value="08">08</option>
+           <option value="09">09</option>
+           <option value="10">10</option>
+           <option value="11">11</option>
+           <option value="12">12</option>
+       </select>
+       <select id="expiry_year" name="expiry_year" required>
+           <option value="2025">2025</option>
+           <option value="2026">2026</option>
+           <option value="2027">2027</option>
+           <option value="2028">2028</option>
+       </select>
+
+       <label for="card_name">Full Name:</label>
+       <input type="text" id="card_name" name="card_name" required>
+
+       <label for="cvc">CVC Code:</label>
+       <input type="text" id="cvc" name="cvc" required>
+
+       <button type="submit" class="confirm-pay-btn">Confirm Payment</button>
+       <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+   </form>
+</div>
+
+
+                 
+             </div>
+             <div class="results" style="display: {% if not result %}none{% endif %};">
+                 <h2>Analysis Results</h2>
+                 {% if result %}
+                     <div class="fraud-score">
+                         <h3>Fraud Score:</h3>
+                         <div class="progress-container">
+                             <div class="progress-bar" 
+                                 style="width: {{ (result[1][0] * 100)|round(2) }}%; 
+                                         background-color: {% if (result[1][0] * 100) < 30 %}#27ae60{% elif (result[1][0] * 100) < 70 %}#f39c12{% else %}#e74c3c{% endif %};">
+                             </div>
+                         </div>
+                         <span class="score-value">{{ (result[1][0] * 100)|round(2) }}%</span>
+                     </div>
+                     
+                     <div class="details">
+                         <h3>Detection Details:</h3>
+                         <div class="details-list">
+                             {% if result[0] == "Fraud" %}
+                                 <div class="detail-item danger">
+                                     <i class="fas fa-times-circle"></i>
+                                     <span>{{ result[0] }} detected with {{ (result[1][0] * 100)|round(2) }}% confidence</span>
+                                 </div>
+                                 <div class="detail-item safe">
+                                     <i class="fas fa-check-circle"></i>
+                                     <span>Non-Fraud score: {{ (result[1][1] * 100)|round(2) }}%</span>
+                                 </div>
+                             {% else %}
+                                 <div class="detail-item safe">
+                                     <i class="fas fa-check-circle"></i>
+                                     <span>{{ result[0] }} - No fraud detected ({{ (result[1][1] * 100)|round(2) }}% confidence)</span>
+                                 </div>
+                                 <div class="detail-item warning">
+                                     <i class="fas fa-exclamation-triangle"></i>
+                                     <span>Fraud score: {{ (result[1][0] * 100)|round(2) }}%</span>
+                                 </div>
+                             {% endif %}
+                         </div>
+                     </div>
+                 {% endif %}
+             </div>
+     
+         </div>
+ 
+         
+       </main>
+      
+      <!--=============== MAIN JS ===============-->
+      <script src="{{ url_for('static', filename = 'js/admindashboard.js') }}"></script>
+      
+      <script>
+        document.getElementById("payBtn").addEventListener("click", function() {
+            // Affiche le formulaire de paiement
+            document.getElementById("paymentContainer").style.display = "block";
+        });
+    
+        document.getElementById("cancelBtn").addEventListener("click", function() {
+            // Masque le formulaire de paiement si l'utilisateur annule
+            document.getElementById("paymentContainer").style.display = "none";
+        });
+    </script>
+    <script>
+      setTimeout(function() {
+          let alertBox = document.querySelector('.alert');
+          if (alertBox) {
+              alertBox.style.display = 'none';
+          }
+      }, 5000); // Le message disparaît après 5 secondes
+  </script>
+  
+
+        
+        
+   </body>
+</html>

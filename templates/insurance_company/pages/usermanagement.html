@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/admindashboard.css') }}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <!--=============== JS ===============-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+      <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <style>
+         .flash-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #dc3545;
+        }
+      </style>        
+      <title>{{ title }}</title>
+   </head>
+   <body>
+      <!--=============== HEADER ===============-->
+      <header class="header" id="header">
+         <div class="header__container">
+            <div class="header__logo">
+            
+               <div class="wrapper">
+                  <div class="navbar">
+                    <!-- <div class="navbar_left">
+                      <div class="logo">
+                        <a href="#"></a>
+                      </div>
+                    </div> -->
+                
+                    <div class="navbar_right">
+                      <div class="notifications">
+                        <div class="icon_wrap">
+                           <i class="far fa-bell"></i>
+                           <span class="count">12</span>
+                        </div>
+                        
+                        <div class="notification_dd">
+                            <ul class="notification_ul">
+                                <li class="starbucks success">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Success</p>  
+                                    </div>
+                                </li>  
+                                <li class="baskin_robbins failed">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Failed</p>  
+                                    </div>
+                                </li> 
+                                <li class="mcd success">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Success</p>  
+                                    </div>
+                                </li>  
+                                <li class="pizzahut failed">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Failed</p>  
+                                    </div>
+                                </li> 
+                                <li class="kfc success">
+                                    <!-- <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div> -->
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            Lorem, ipsum dolor.  
+                                        </div>
+                                        <div class="sub_title">
+                                          Lorem ipsum dolor sit amet consectetur.
+                                      </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Success</p>  
+                                    </div>
+                                </li> 
+                                <li class="show_all">
+                                    <p class="link">Show All Activities</p>
+                                </li> 
+                            </ul>
+                        </div>
+                        
+                      </div>
+                      <div class="profile">
+                        <div class="icon_wrap">
+                          <img src="{{ url_for('static', filename = 'img/avatars/Female.png') }}" alt="profile_pic">
+                          <span class="name">{{session.adminname}} </span>
+                          <i class="fas fa-chevron-down"></i>
+                        </div>
+                
+                        <div class="profile_dd">
+                          <ul class="profile_ul">
+                            <li><a class="profile" href="#"><span class="picon"><i class="fas fa-user-alt"></i></span>Profile</a>
+                              <!-- <div class="btn">My Account</div> -->
+                            </li>
+                            <li><a class="settings" href="#"><span class="picon"><i class="fas fa-cog"></i></span>Settings</a></li>
+                            <li><a class="logout" href="/adminlogout"><span class="picon"><i class="fas fa-sign-out-alt"></i></span>Logout</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               </div>   
+            </div>
+            <button class="header__toggle" id="header-toggle">
+               <i class="ri-menu-line"></i>
+            </button>
+         </div>
+      </header>
+
+      <!--=============== SIDEBAR ===============-->
+      <nav class="sidebar" id="sidebar">
+         <div class="sidebar__container">
+            <div class="sidebar__user">
+               <div class="sidebar__img">
+                  <img src="{{ url_for('static', filename = 'img/icon/icon-02-light.png') }}" alt="image">
+               </div>
+   
+               <div class="sidebar__info">
+                  <h3>InsurSafe AI</h3>
+                  <span></span>
+               </div>
+            </div>
+
+            <div class="sidebar__content">
+               <div>
+                  <h3 class="sidebar__title">MANAGE</h3>
+
+                  <div class="sidebar__list">
+                     <a href="/insurance_company/pages/dashboard" class="sidebar__link active-link">
+                        <i class="ri-pie-chart-2-fill"></i>
+                        <span>Dashboard</span>
+                     </a>
+                     
+                     <a href="/insurance_company/pages/claimverification2" class="sidebar__link">
+                        <i class="ri-robot-2-fill"></i>
+                        <span>Image Fraud Detection</span>
+                     </a>
+                     <a href="/insurance_company/pages/claims_history2" class="sidebar__link active-link">
+                        <i class="ri-profile-fill"></i>
+                        <span>Fraud Detection History</span>
+                     </a>
+                     <a href="/insurance_company/pages/usermanagement" class="sidebar__link">
+                        <i class="ri-group-fill"></i>
+                        <span>Users Management</span>
+                     </a>
+<!--
+
+                     <a href="#" class="sidebar__link">
+                        <i class="ri-profile-fill"></i>
+                        <span>Applications</span>
+                     </a>
+
+                     <a href="/admin/pages/claimverification" class="sidebar__link">
+                        <i class="ri-robot-2-fill"></i>
+                        <span>Claim verification</span>
+                     </a>
+
+                     <a href="/admin/pages/claims_history" class="sidebar__link">
+                        <i class="ri-profile-fill"></i>
+                        <span>Claims History</span>
+                     </a>
+
+                     <a href="#" class="sidebar__link">
+                      <i class="ri-bank-card-fill"></i>
+                      <span>Payments</span>
+                   </a>
+                  </div>
+               </div>
+
+               <div>
+                  <h3 class="sidebar__title">SETTINGS</h3>
+
+                  <div class="sidebar__list">
+                     <a href="#" class="sidebar__link">
+                        <i class="ri-settings-3-fill"></i>
+                        <span>Settings</span>
+                     </a>
+
+                     <a href="#" class="sidebar__link">
+                        <i class="ri-mail-unread-fill"></i>
+                        <span>My Messages</span>
+                     </a>
+
+                     <a href="#" class="sidebar__link">
+                        <i class="ri-notification-2-fill"></i>
+                        <span>Notifications</span>
+                     </a>
+                  </div>
+               </div>
+            </div>
+                  -->
+            <div class="sidebar__actions">
+               <button>
+                  <i class="ri-moon-clear-fill sidebar__link sidebar__theme" id="theme-button">
+                     <span>Theme</span>
+                  </i>
+               </button>
+
+               <a href="/insurance_company_logout" class="sidebar__link">
+                  <i class="ri-logout-box-r-fill"></i>
+                  <span>Log Out</span>
+               </a>
+            </div>
+         </div>
+      </nav>
+
+      <!--=============== MAIN ===============-->
+      <main class="main container" id="main">
+         <!-- CRUD Operations Sections -->
+         <div class="grid grid-cols-1 gap-6">
+            <!-- User Management -->
+            <div class="border-b px-6 py-4 flex justify-between items-center">
+                <h2 class="font-bold text-xl">Users Management</h2>
+                <form action="{{ url_for('search_users') }}" method="GET" class="flex">
+                    <input type="text" name="query" placeholder="Search users..." class="border rounded-lg px-3 py-2 text-sm" required>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm ml-2">
+                        Search
+                    </button>
+                </form>
+            
+                  <!--  <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+                        <i class="fas fa-plus mr-2"></i> Add User
+                    </button>-->
+                </div>
+
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-blue-500 text-white">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Gender</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Phone</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">City</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Street</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Registered</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                    
+                
+                        <tbody class="divide-y divide-gray-200">
+                           {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="container mt-3">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} flash-message text-center" role="alert">
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+
+                            {% for user in users %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ user.id }}</td>
+                                <!-- <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <img src="/api/placeholder/28/28" alt="User" class="h-7 w-7 rounded-full mr-2">
+                                        <span class="text-sm text-gray-700"></span>
+                                    </div>
+                                </td> -->
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{user.first_name}} {{user.last_name}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ user.gender }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ user.phone }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ user.city }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ user.street }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ user.email }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{% if user.status == 1 %}Active{% else %}Inactive{% endif %}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ user.join_date }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                    
+                                    <a href="{{ url_for('edit_user', user_id=user.id) }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ url_for('delete_user', user_id=user.id) }}" method="post" style="display:inline;">
+                                       <button type="submit" onclick="return confirm('Are you sure you want to delete this user?');" class="btn btn-danger btn-sm">
+                                           <i class="fas fa-trash"></i>
+                                       </button>
+                                   </form>
+                                                                   </td>
+                            </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="px-6 py-4 border-t">
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm text-gray-500">
+                            <!-- Showing <span class="font-medium">1</span> to <span class="font-medium">3</span> of <span class="font-medium">1,269</span> users -->
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="border border-gray-300 rounded-md px-3 py-1 text-sm text-gray-500">Previous</button>
+                            <button class="border border-gray-300 rounded-md px-3 py-1 text-sm bg-blue-500 text-white">1</button>
+                            <button class="border border-gray-300 rounded-md px-3 py-1 text-sm text-gray-500">2</button>
+                            <button class="border border-gray-300 rounded-md px-3 py-1 text-sm text-gray-500">3</button>
+                            <button class="border border-gray-300 rounded-md px-3 py-1 text-sm text-gray-500">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+         
+      </main>
+      
+      <!--=============== JS ===============-->
+      <script src="{{ url_for('static', filename = 'js/admindashboard.js') }}"></script>
+      <script>
+         document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                let alerts = document.querySelectorAll(".flash-message");
+                alerts.forEach(alert => alert.style.display = "none");
+            }, 5000); // Disparaît après 5 secondes
+        });
+      </script>  
+            
+   </body>
+</html>

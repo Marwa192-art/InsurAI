@@ -1,0 +1,6 @@
+Flask
+pandas
+tensorflow
+numpy
+pillow
+flask-mysqldb
